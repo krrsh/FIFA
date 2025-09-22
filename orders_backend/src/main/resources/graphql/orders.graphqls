@@ -1,0 +1,84 @@
+# GraphQL schema for Orders module
+
+"""Represents an order record"""
+type OrderItem {
+  productName: String
+  itemId: ID!
+  productStyle: String
+  productSize: String
+  orderQty: Int
+  isAccessories: Boolean
+  status: String
+}
+
+type Order {
+  orderId: ID!
+  supplierId: Int
+  orderItem: String
+  orderType: String
+  orderService: String
+  companyId: Int 
+  personId: Int
+  customerId: Int
+  materialId: Int
+  isUrgent: Boolean
+  isForeign: Boolean
+  dueDate: String
+  deliveryDate: String
+  dcNumber: String
+  poNumber: String
+  orderItems: [OrderItem!]!
+}
+
+"""Response wrapper for orders operations (single or multiple)"""
+type OrdersResponse {
+  success: Boolean!
+  message: String
+  order: Order
+  orders: [Order!]
+}
+
+
+"""Input type for creating an order with limited fields"""
+input OrderItemInput {
+  productName: String
+  productStyle: String!
+  productColour: String
+  productSize: String!
+  productSizeCm: Float
+  threadType: String
+  orderQty: Int!
+  deliverQty: Int
+  completeQty: Int
+  qcQty: Int
+  billQty: Int
+  qtyUom: String
+  unitRate: Float
+  isAccessories: Boolean
+  currency: String
+}
+
+input OrderCreateInput {
+  companyId: Int
+  supplierId: Int!
+  dcNumber: String
+  poNumber: String
+  isUrgent: Boolean
+  isForeign: Boolean
+  dueDate: String
+  items: [OrderItemInput!]! 
+
+}
+
+type Query {
+  orders: OrdersResponse!
+  order(id: ID!): OrdersResponse
+}
+
+type Mutation {
+  createOrder(input: OrderCreateInput!): OrdersResponse!
+  updateOrder(id: ID!, input: OrderCreateInput!): OrdersResponse!
+  deleteOrder(id: ID!): OrdersResponse!
+  correctOrderItem(orderId: ID!, itemId: ID!, correctedItem: OrderItemInput!): OrdersResponse!
+}
+ 
