@@ -11,7 +11,7 @@ const DEFAULT_HOSTS = [
 	'http://10.0.2.2:8080/graphql', // Android emulator
 	'http://localhost:8080/graphql',
 	'http://127.0.0.1:8080/graphql',
-	'http://192.168.1.105:8080/graphql',
+	'http://192.168.1.110:8080/graphql',
 ].filter(Boolean) as string[];
 
 const GRAPHQL_ENDPOINTS = Array.from(new Set(DEFAULT_HOSTS));
