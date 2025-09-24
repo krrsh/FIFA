@@ -11,10 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-@RequiredArgsConstructor
 public class OrdersDataFetcher {
 
     private final OrdersService ordersService;
+
+    // Explicit constructor to ensure ordersService is always initialized, even if Lombok is not processed
+    public OrdersDataFetcher(OrdersService ordersService) {
+        this.ordersService = ordersService;
+    }
 
     /* ------------- QUERIES ------------- */
 
