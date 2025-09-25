@@ -7,10 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.graphql.execution.RuntimeWiringConfigurer;
 
 @Configuration
-@RequiredArgsConstructor
 public class GraphQLConfig {
 
     private final OrdersDataFetcher ordersDataFetcher;
+
+    // Explicit constructor to ensure ordersDataFetcher is always initialized, even if Lombok is not processed
+    public GraphQLConfig(OrdersDataFetcher ordersDataFetcher) {
+        this.ordersDataFetcher = ordersDataFetcher;
+    }
 
     @Bean
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {
